@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from .forms import ArticleForm
 from django.contrib import messages
 from .models import Article
@@ -27,5 +27,6 @@ def addArticle(request):
     return render(request, "addarticle.html", {"form":form})
 
 def detail(request, id):
-    article=Article.objects.filter(id=id).first()   #gördüğü ilk article döndür demek için, first yazmazsak bir obje döndürüyor query set döndürüyor
+    #article=Article.objects.filter(id=id).first()   #gördüğü ilk article döndür demek için, first yazmazsak bir obje döndürüyor query set döndürüyor
+    article=get_object_or_404(Article, id=id )
     return render(request, "detail.html", {"article":article})
