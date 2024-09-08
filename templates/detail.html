@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{% block body %}
+    
+
+
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Post content-->
+                    <article>
+                        <!-- Post header-->
+                        <header class="mb-4">
+                            <!-- Post title-->
+                            <h2 class="fw-bolder mb-1">{{article.title}}</h2>
+                            <p class="lead">{{article.author}}</p>
+                            <hr>
+                
+                            <div class="text-muted fst-italic mb-2">{{article.created_date}}</div>
+            
+                        </header>
+                      
+                        <section class="mb-5">
+                            <p class="fs-5 mb-4">{{article.content}}</p>
+                        </section>
+                    </article>
+                </div>
+            </div>
+        
+        
+
+
+
+
+
+
+{% endblock %}
