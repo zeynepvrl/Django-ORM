@@ -8,3 +8,6 @@ urlpatterns=[
     path('addarticle/', views.addArticle, name="addarticle"),
     path('detail/<int:id>', views.detail, name="detail"),
 ]
+
+
+

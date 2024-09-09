@@ -17,7 +17,7 @@ def dashboard(request):
     return render(request, "dashboard.html", context)
 
 def addArticle(request):
-    form=ArticleForm(request.POST or None)
+    form=ArticleForm(request.POST or None , request.FILES or None)
     if form.is_valid():
         article= form.save(commit=False)   #kaydet ama veritabanına sen gönderme ben user ını da ekleyip kendim göndericem demek
         article.author=request.user
