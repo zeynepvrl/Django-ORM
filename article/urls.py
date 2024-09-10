@@ -10,6 +10,7 @@ urlpatterns=[
     path('update/<int:id>', views.ArticleUpdate, name="ArticleUpdate"),
     path('delete/<int:id>', views.ArticleDelete, name="ArticleDelete"),
     path('', views.articles, name="articles"),
+    path('comment/<int:id>', views.addComment, name="comment"),
 ]
 
 

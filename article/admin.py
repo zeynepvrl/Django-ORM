@@ -1,8 +1,11 @@
 from django.contrib import admin
 from .models import Article
+from .models import Comment
 
 # Register your models here.
 #admin.site.register(Article)  admin panelini özelleştirmek için bu işlemi dekorator olarak yazıcaz. Decorator her zzaman fonksiyonlar için kullanılmaz class için de kullanılır
+
+admin.site.register(Comment)
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):

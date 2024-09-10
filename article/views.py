@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
+from django.shortcuts import render, redirect, HttpResponse, get_object_or_404,reverse
 from .forms import ArticleForm
 from django.contrib import messages
-from .models import Article
+from .models import Article,Comment
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 def index(request):
@@ -33,7 +33,8 @@ def addArticle(request):
 def detail(request, id):
     #article=Article.objects.filter(id=id).first()   #gördüğü ilk article döndür demek için, first yazmazsak bir obje döndürüyor query set döndürüyor
     article=get_object_or_404(Article, id=id )
-    return render(request, "detail.html", {"article":article})
+    comments=article.comments.all()
+    return render(request, "detail.html", {"article":article , "comments":comments})
 
 @login_required
 def ArticleUpdate(request, id):     
@@ -60,3 +61,17 @@ def articles(request):         #bu fonksiyon iki farklı get requestinde çalı�
         return render(request, "articles.html", {"articles":articles})
     articles=Article.objects.all()
     return render(request, "articles.html", {"articles":articles})
+
+def addComment(request,id):
+    article=get_object_or_404(Article, id=id)
+    if request.method=="POST":
+        comment_author=request.POST.get('comment_author')
+        comment_content=request.POST.get('comment_content')
+
+        newComment=Comment(comment_author=comment_author, comment_content=comment_content)
+        newComment.article=article
+
+        newComment.save()
+        return redirect(reverse("article:detail", kwargs={"id":id}))   #dinamik bir url redirct ederken reverse fonksiyonu kullanılmalı
+        #return redirect("/article/detail/"+ str(id))
+
