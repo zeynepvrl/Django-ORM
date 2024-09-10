@@ -40,3 +40,9 @@ def ArticleUpdate(request, id):
         messages.success(request, "Makale Başarı ile güncellendi")
         return redirect("article:detail", id=id)  # Detay sayfasına yönlendir
     return render(request, "update.html", {"form":form} )
+
+def ArticleDelete(reqest, id):
+    article=get_object_or_404(Article, id=id)
+    article.delete()
+    messages.info(reqest, "Silme işlemi başarılı")
+    return redirect("article:dashboard")
