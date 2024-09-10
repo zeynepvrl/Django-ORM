@@ -30,3 +30,13 @@ def detail(request, id):
     #article=Article.objects.filter(id=id).first()   #gördüğü ilk article döndür demek için, first yazmazsak bir obje döndürüyor query set döndürüyor
     article=get_object_or_404(Article, id=id )
     return render(request, "detail.html", {"article":article})
+
+def ArticleUpdate(request, id):     
+    article=get_object_or_404(Article, id=id)
+    form=ArticleForm(request.POST or None, request.FILES or None, instance=article)  #post ise ilk ikisi kullanılacak get ise 3.
+
+    if form.is_valid():      #get requestte yukardaki form boş oluşturulacağı için valid olmaz ve bu bloc atlanır
+        form.save()
+        messages.success(request, "Makale Başarı ile güncellendi")
+        return redirect("article:detail", id=id)  # Detay sayfasına yönlendir
+    return render(request, "update.html", {"form":form} )

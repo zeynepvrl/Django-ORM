@@ -8,7 +8,9 @@ class Article(models.Model):          #bu article ı kayıt etmen gerekiyor admi
     title=models.CharField(max_length=50) 
     content=RichTextField()
     created_date=models.DateTimeField(auto_now_add=True)     #verbose_name ile bu alanların admin panelindeki ismini değiştirebilirsin
-    article_image = models.FileField(verbose_name="Görsel ekleyin")   # Article modelinde değişiklik yaptığımızı bildirmek için pythonmanage.py makemigrations ve sonra yine " " migrate 
+    article_image = models.FileField(blank=True, null=True, verbose_name="Görsel ekleyin")   # Article modelinde değişiklik yaptığımızı bildirmek için pythonmanage.py makemigrations ve sonra yine " " migrate 
+                                    #bunları eklemezsem cleanup gücelleme sırasında görsel ekleme yerine temizle seçeneği geitrmez
+
 
     #article tablosunda article ların article1 2 gibi sıralanmasını değil de başlıkları ile sıralanmasının istersem;
     def __str__(self):
