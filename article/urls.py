@@ -9,6 +9,7 @@ urlpatterns=[
     path('detail/<int:id>', views.detail, name="detail"),
     path('update/<int:id>', views.ArticleUpdate, name="ArticleUpdate"),
     path('delete/<int:id>', views.ArticleDelete, name="ArticleDelete"),
+    path('', views.articles, name="articles"),
 ]
 
 

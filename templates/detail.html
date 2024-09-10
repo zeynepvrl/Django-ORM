@@ -22,7 +22,7 @@
                         <img src="{{article.article_image.url}}" alt="" class="img-fluid rounded">
                         {% endif %}
                         <section class="mb-5">
-                            <p class="fs-5 mb-4">{{article.content}}</p>
+                            <p class="fs-5 mb-4">{{article.content|safe}}</p>
                         </section>
                     </article>
                 </div>

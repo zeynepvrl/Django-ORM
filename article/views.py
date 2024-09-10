@@ -52,3 +52,11 @@ def ArticleDelete(reqest, id):
     article.delete()
     messages.info(reqest, "Silme işlemi başarılı")
     return redirect("article:dashboard")
+
+def articles(request):         #bu fonksiyon iki farklı get requestinde çalışacal
+    keyword=request.GET.get('keyword')     #arama çubuğuna basıldığında gönderilen GET requesti bu keyword ü taşır
+    if keyword:
+        articles=Article.objects.filter(title__contains=keyword)
+        return render(request, "articles.html", {"articles":articles})
+    articles=Article.objects.all()
+    return render(request, "articles.html", {"articles":articles})
